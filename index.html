@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benhur Biju | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f1e1; --bg2:#efe7d0; --text:#1f3a2b; --muted:#587060;
+  --violet:#2f7d52; --sky:#3b8a5a; --amber:#a86a12; --line:rgba(31,58,43,.18);
+  --head:'Bricolage Grotesque','Trebuchet MS',sans-serif; --body:'DM Sans','Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--text);font:400 1.05rem/1.7 var(--body)}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;
+  padding:.9rem 5vw;background:rgba(247,241,225,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font:800 1.2rem var(--head);text-decoration:none}
+nav ul{display:flex;gap:.4rem;list-style:none}
+nav ul a{display:block;padding:.4rem .9rem;border-radius:99px;text-decoration:none;color:var(--muted);transition:background .25s,color .25s}
+nav ul a:hover{color:var(--text)}
+nav ul a.active{background:var(--violet);color:#fff}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--text);padding:.4rem .8rem;border-radius:8px;font:inherit;cursor:pointer}
+
+section{min-height:100vh;padding:7rem 5vw 4rem;max-width:1100px;margin:auto;display:flex;flex-direction:column;justify-content:center}
+h2{font:800 clamp(2rem,5vw,3.2rem)/1.1 var(--head);margin-bottom:2rem}
+p{max-width:62ch}
+
+/* hero: the one orchestrated moment */
+#home h1{font:800 clamp(3rem,10vw,7.5rem)/.95 var(--head);letter-spacing:-.02em}
+#home h1 span{display:inline-block;opacity:0;transform:translateY(60px) rotate(6deg);animation:pop .8s cubic-bezier(.2,.9,.3,1.3) forwards}
+@keyframes pop{to{opacity:1;transform:none}}
+.role{margin-top:1.5rem;font:600 clamp(1.2rem,3vw,1.8rem) var(--head);color:var(--sky);min-height:2.2rem}
+.role i{display:inline-block;width:3px;height:1.2em;background:var(--amber);margin-left:4px;vertical-align:middle;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-p{margin-top:1.2rem;color:var(--muted)}
+.btns{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn{padding:.8rem 1.6rem;border-radius:99px;text-decoration:none;font-weight:500;border:2px solid var(--violet);transition:transform .2s,background .2s}
+.btn.main{background:var(--violet);color:#fff}
+.btn:hover{transform:translateY(-3px)}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:start}
+.about-grid p+p{margin-top:1rem}
+.facts{border-left:3px solid var(--amber);padding-left:1.5rem;display:grid;gap:1.2rem}
+.facts b{display:block;font:600 1rem var(--head);color:var(--amber)}
+.facts span{color:var(--muted)}
+.project{margin-top:3rem;padding:1.6rem;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.55)}
+.project h3{font:600 1.3rem var(--head);margin-bottom:.5rem}
+.tags{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.tags span{padding:.2rem .8rem;border-radius:99px;background:rgba(47,125,82,.12);color:var(--sky);font-size:.9rem}
+
+/* skills */
+.skill-cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+h3.sub{font:600 1.2rem var(--head);margin-bottom:1.2rem;color:var(--amber)}
+.bar{margin-bottom:1.3rem}
+.bar div{display:flex;justify-content:space-between;margin-bottom:.35rem}
+.track{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--violet),var(--sky));transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.chips{display:flex;flex-wrap:wrap;gap:.8rem}
+.chips span{padding:.7rem 1.3rem;border-radius:99px;border:1px solid var(--line);transition:background .25s,transform .25s}
+.chips span:hover{background:var(--violet);color:#fff;transform:scale(1.06)}
+
+/* education timeline */
+.timeline{position:relative;padding-left:2rem;border-left:2px solid var(--line);display:grid;gap:2.5rem}
+.item{position:relative}
+.item::before{content:"";position:absolute;left:calc(-2rem - 8px);top:.5rem;width:14px;height:14px;border-radius:50%;background:var(--violet);border:2px solid var(--bg)}
+.item.now::before{background:var(--amber);box-shadow:0 0 0 0 rgba(168,106,18,.5);animation:pulse 2s infinite}
+@keyframes pulse{to{box-shadow:0 0 0 14px rgba(168,106,18,0)}}
+.item time{color:var(--sky);font-weight:500}
+.item h3{font:600 1.35rem var(--head);margin:.2rem 0}
+.item small{color:var(--muted);font-size:1rem}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem}
+.contact-grid ul{list-style:none;display:grid;gap:1.2rem}
+.contact-grid li span{display:block;color:var(--muted);font-size:.9rem}
+.contact-grid a{text-decoration:none;font-weight:500;font-size:1.15rem}
+.contact-grid a:hover{color:var(--sky)}
+form{display:grid;gap:1rem}
+label{display:grid;gap:.3rem;color:var(--muted);font-size:.95rem}
+input,textarea{font:inherit;color:var(--text);background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem}
+textarea{min-height:130px;resize:vertical}
+button.btn{cursor:pointer;font:inherit;font-weight:500}
+footer{text-align:center;padding:2rem;color:var(--muted);border-top:1px solid var(--line)}
+
+@media(max-width:760px){
+  .burger{display:block}
+  nav ul{position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg2);padding:1rem 5vw;display:none}
+  nav ul.open{display:flex}
+  .about-grid,.skill-cols,.contact-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  #home h1 span{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<nav>
+  <a class="logo" href="#home">Benhur Biju</a>
+  <button class="burger" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+  <ul id="menu">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+<section id="home">
+  <h1 id="name" aria-label="Benhur Biju">Benhur<br>Biju</h1>
+  <div class="role"><span id="typed"></span><i></i></div>
+  <p class="hero-p">BCA student in Kochi who builds with Python and Django, and wants to work where technology meets creative communication.</p>
+  <div class="btns">
+    <a class="btn main" href="#about">About me</a>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <div class="about-grid">
+    <div>
+      <p>I'm a curious and enthusiastic Bachelor of Computer Applications student. I enjoy learning new things, exploring different fields, and taking on opportunities that help me grow personally and professionally.</p>
+      <p>I'm especially interested in the creative and communication side of digital marketing, and I'm eager to build my skills through practical, real-world work.</p>
+    </div>
+    <div class="facts">
+      <div><b>Based in</b><span>Kochi, Kerala</span></div>
+      <div><b>Studying</b><span>BCA, 2024 to 2028</span></div>
+      <div><b>Interested in</b><span>Digital marketing, web development</span></div>
+    </div>
+  </div>
+  <div class="project">
+    <h3>CareBridge: donations for contingencies</h3>
+    <p>A web-based Donation and Claims Management System built with Python and Django. It manages user information, donations, claims, and categories through a structured database.</p>
+    <div class="tags"><span>Python</span><span>Django</span><span>Database design</span></div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skill-cols">
+    <div>
+      <h3 class="sub">Technical</h3>
+      <div class="bar"><div><span>Python (basic)</span><span>Basic</span></div><div class="track"><div class="fill" data-w="45"></div></div></div>
+      <div class="bar"><div><span>Microsoft Excel</span><span>Working</span></div><div class="track"><div class="fill" data-w="65"></div></div></div>
+      <div class="bar"><div><span>Digital marketing</span><span>Learning</span></div><div class="track"><div class="fill" data-w="55"></div></div></div>
+    </div>
+    <div>
+      <h3 class="sub">Soft skills</h3>
+      <div class="chips"><span>Communication</span><span>Leadership</span><span>Teamwork</span><span>Problem-solving</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="timeline">
+    <div class="item now">
+      <time>2024 to 2028 · Currently pursuing</time>
+      <h3>Bachelor of Computer Applications (BCA)</h3>
+      <small>Nirmala Arts and Science College, Mulanthuruthy</small>
+    </div>
+    <div class="item">
+      <time>2022 to 2024 · Completed</time>
+      <h3>Higher Secondary Education</h3>
+      <small>Government Higher Secondary School (GHSS), Edappally</small>
+    </div>
+    <div class="item">
+      <time>Workshop</time>
+      <h3>Student Exchange and Technology Exposure</h3>
+      <small>GITAM University, Bangalore</small>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-grid">
+    <ul>
+      <li><span>Email</span><a href="mailto:benhurbiju77@gmail.com">benhurbiju77@gmail.com</a></li>
+      <li><span>Phone</span><a href="tel:+918075043783">+91 8075043783</a></li>
+      <li><span>Location</span>Kochi, Kerala</li>
+    </ul>
+    <form id="form">
+      <label>Your name<input name="name" required></label>
+      <label>Your email<input name="email" type="email" required></label>
+      <label>Message<textarea name="msg" required></textarea></label>
+      <button class="btn main" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+</main>
+<footer>© 2026 Benhur Biju</footer>
+
+<script>
+/* Hero: split name into letters for the entrance animation */
+(function(){
+  const h=document.getElementById('name');
+  const nodes=[...h.childNodes];h.innerHTML='';let i=0;
+  nodes.forEach(n=>{
+    if(n.nodeType===3){[...n.textContent].forEach(c=>{const s=document.createElement('span');s.textContent=c;s.style.animationDelay=(i++*70)+'ms';s.setAttribute('aria-hidden','true');h.appendChild(s)})}
+    else h.appendChild(n.cloneNode());
+  });
+})();
+
+/* Typing roles */
+(function(){
+  const roles=['BCA scholar','Python and Django learner','Digital marketing enthusiast'];
+  const el=document.getElementById('typed');let r=0,c=0,del=false;
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(still){el.textContent=roles.join(' / ');return}
+  (function tick(){
+    const w=roles[r];
+    el.textContent=w.slice(0,c);
+    if(!del&&c===w.length){del=true;return setTimeout(tick,1500)}
+    if(del&&c===0){del=false;r=(r+1)%roles.length}
+    c+=del?-1:1;setTimeout(tick,del?35:80);
+  })();
+})();
+
+/* Animated background: drifting colour blobs plus a connected particle field */
+(function(){
+  const cv=document.getElementById('bg'),ctx=cv.getContext('2d');
+  let W,H,t=0;
+  const blobs=[['#8fd1a4',.5],['#c9e4a8',.5],['#f3d58a',.4],['#5fb585',.28]].map((b,i)=>({c:b[0],a:b[1],x:Math.random(),y:Math.random(),p:i*1.7,r:.35+Math.random()*.2}));
+  let pts=[];
+  function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;
+    pts=Array.from({length:Math.min(70,Math.floor(W*H/22000))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4}))}
+  addEventListener('resize',size);size();
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function draw(){
+    t+=.004;
+    ctx.fillStyle='#f7f1e1';ctx.fillRect(0,0,W,H);
+    blobs.forEach(b=>{
+      const x=(.5+.4*Math.sin(t+b.p))*W, y=(.5+.4*Math.cos(t*.8+b.p*1.3))*H, r=b.r*Math.max(W,H);
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,b.c+Math.round(b.a*255).toString(16).padStart(2,'0'));g.addColorStop(1,b.c+'00');
+      ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    });
+    ctx.strokeStyle='rgba(47,125,82,.25)';ctx.fillStyle='rgba(47,125,82,.6)';
+    pts.forEach((p,i)=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,7);ctx.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<130){ctx.globalAlpha=1-d/130;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();ctx.globalAlpha=1}
+      }
+    });
+    if(!still)requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* Nav: active link on scroll, mobile menu */
+const links=[...document.querySelectorAll('#menu a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'}).observe&&secs.forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'}).observe(s));
+const burger=document.querySelector('.burger'),menu=document.getElementById('menu');
+burger.onclick=()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)};
+menu.onclick=()=>{menu.classList.remove('open');burger.setAttribute('aria-expanded',false)};
+
+/* Skill bars fill when scrolled into view */
+new IntersectionObserver((es,ob)=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%');ob.unobserve(e.target)}
+}),{threshold:.3}).observe(document.getElementById('skills'));
+
+/* Contact form opens the visitor's email app (no server needed) */
+document.getElementById('form').onsubmit=e=>{
+  e.preventDefault();const f=e.target;
+  const body=`${f.msg.value}\n\nFrom: ${f.name.value} (${f.email.value})`;
+  location.href='mailto:benhurbiju77@gmail.com?subject='+encodeURIComponent('Portfolio message from '+f.name.value)+'&body='+encodeURIComponent(body);
+};
+</script>
+</body>
+</html>
